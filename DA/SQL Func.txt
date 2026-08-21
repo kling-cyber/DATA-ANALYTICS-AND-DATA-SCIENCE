@@ -1,0 +1,52 @@
+SQL Func:
+1.Sql provides its inbuilt function
+
+2.Sql functions are:
+-Aggrigate func:
+.sum()=sum
+.avg()=average
+.count()=count total
+.min()=minimum
+.max()=maximum
+
+-Scalar func:
+-first()
+-last()
+-lcase()
+-ucase()
+-now()
+-datetime()
+-timestamp()
+
+3.Function Query:
+select sum() as nickname from table_name;
+select avg() as nickname from table_name;
+select count() as nickname from table_name;
+
+3.sub_function Query:
+.query within another query
+
+4.Like Query 
+
+select * from table_name where name like '%t' =  end with t
+
+or 
+
+
+select * from table_name where name like 't%' = start with t
+
+or 
+
+select * from table_name where name like '%t%' = anywhere t 
+
+or 
+
+select * from table_name where name like '%a' or '%r'
+
+
+	
+
+
+
+
+
