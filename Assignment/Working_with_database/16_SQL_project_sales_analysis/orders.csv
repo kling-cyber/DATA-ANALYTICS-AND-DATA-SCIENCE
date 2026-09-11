@@ -1,0 +1,21 @@
+order_id,restaurant_name,customer_name,order_amount,order_date
+1,Spice Garden,Rahul Patel,450,2025-01-15
+2,Italiano Kitchen,Priya Shah,780,2025-02-03
+3,Food Junction,Amit Mehta,520,2025-03-12
+4,The Curry House,Neha Joshi,650,2025-04-20
+5,Pizza Point,Rohan Shah,890,2025-05-08
+6,Green Leaf Restaurant,Anjali Patel,430,2025-06-17
+7,Urban Bites,Vivek Desai,720,2025-07-25
+8,Italiano Kitchen,Karan Patel,950,2025-08-11
+9,Spice Garden,Meera Shah,580,2025-09-06
+10,Food Junction,Jay Patel,610,2025-10-19
+11,Pizza Point,Riya Mehta,820,2025-11-02
+12,The Curry House,Harsh Joshi,490,2025-12-14
+13,Urban Bites,Nikhil Shah,760,2026-01-09
+14,Green Leaf Restaurant,Pooja Patel,540,2026-02-18
+15,Italiano Kitchen,Dev Mehta,1100,2026-03-07
+16,Spice Garden,Krisha Desai,670,2026-04-21
+17,Pizza Point,Akash Patel,930,2026-05-13
+18,Food Junction,Simran Shah,480,2026-06-05
+19,The Curry House,Mihir Patel,720,2026-07-16
+20,Urban Bites,Dhruv Mehta,850,2026-08-22
