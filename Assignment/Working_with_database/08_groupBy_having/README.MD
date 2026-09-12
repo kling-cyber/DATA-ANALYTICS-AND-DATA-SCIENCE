@@ -1,17 +1,17 @@
 ## **Create a table called Orders with columns: order_id, user_id, payment_method, and amount. Insert at least 8 sample records representing different users and payment methods (like UPI, Card, Wallet, COD).**
 
 ```sql 
-TABLE CREATE Orders (
+CREATE TABLE Orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NUll,
-    payment_method VARCHAR(30) CHECK (payment_method IN('UPI', 'Card', 'Wallet', 'COD' )),
-    amount DECIMAL (10,2) 
-    );
+    user_id INT NOT NULL,
+    payment_method VARCHAR(30) CHECK (payment_method IN ('UPI', 'Card', 'Wallet', 'COD')),
+    amount DECIMAL(10,2)
+);
 ```
 ## **insert Data** 
 ```sql
-INSERT INTO Orders (user_id, payment_method,amount) 
-VALUES (1,'card',)
+INSERT INTO Orders (user_id, payment_method, amount) 
+VALUES (1, 'Card', 500.00),
 (1, 'UPI', 1250.50),
 (2, 'Card', 2300.00),
 (5, 'Wallet', 750.75),
@@ -26,45 +26,53 @@ VALUES (1,'card',)
 ## **Write an SQL query to count how many orders were placed using each payment_method in the Orders table.**
 
 ```sql
-SELECT payment_method , COUNT(order_id) AS Total_orders
+SELECT payment_method, COUNT(order_id) AS Total_orders
 FROM Orders 
-GROUP BY payment_method ;
+GROUP BY payment_method;
 ```
 
 ## **Write an SQL query to find the total amount spent by each user_id in the Orders table. Display user_id and their total spend.**
 
 ```sql
 SELECT user_id, SUM(amount) AS total_amount
-FROM Orders;
+FROM Orders
+GROUP BY user_id;
 ```
 
 ## **Write an SQL query to show only those payment methods where the average order amount is greater than 300, using GROUP BY and HAVING.Use AVG(amount) in your HAVING clause.**
 
 ```sql
-SELECT payment_method , AVG(amount) FROM Orders
-GROUP BY payment_method HAVING AVG(amount) > 300;
+SELECT payment_method, AVG(amount) AS average_amount
+FROM Orders
+GROUP BY payment_method
+HAVING AVG(amount) > 300;
 ```
 ## **Explain the difference between WHERE and HAVING by giving one example query for each, using the Orders table. Your examples should show a scenario where WHERE and HAVING filter different things.**
 
 ## Difference Between WHERE and HAVING
-*WHERE Filter data according to contion on before gruop by*
+*WHERE filters rows according to a condition before GROUP BY*
 ```sql
 SELECT * FROM Orders
 WHERE amount > 300;
 ```
 
-*HAVING Is use use to filter data after group by*
+*HAVING is used to filter groups after GROUP BY*
 ```sql
-SELECT payment_method , AVG(amount) FROM Orders
-GROUP BY payment_method HAVING AVG(amount) > 300;
+SELECT payment_method, AVG(amount) AS average_amount
+FROM Orders
+GROUP BY payment_method
+HAVING AVG(amount) > 300;
 ```
-**We can use WHERE and HAVING togather**
+**We can use WHERE and HAVING together**
 
 ```sql
-SELECT payment_method , AVG(amount) FROM Orders
+SELECT payment_method, AVG(amount) AS average_amount
+FROM Orders
 WHERE amount > 100 
-GROUP BY payment_method HAVING AVG(amount) > 300;
+GROUP BY payment_method
+HAVING AVG(amount) > 300;
 ```
+
 ## **execution concept**
 ```
 1. FROM Orders
