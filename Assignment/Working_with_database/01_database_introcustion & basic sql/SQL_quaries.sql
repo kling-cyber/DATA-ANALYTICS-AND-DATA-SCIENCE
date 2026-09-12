@@ -6,8 +6,8 @@ USE foodie_app;
 CREATE TABLE restaurants (
 id INT AUTO_INCREMENT PRIMARY KEY ,
 name VARCHAR(100) NOT NULL,
-cuisin VARCHAR(50) NOT NULL,
-rating DECIMAL(2,2),
+cusine VARCHAR(50) NOT NULL,
+rating DECIMAL(3,1),
 location VARCHAR(100) NOT NULL);
 
 CREATE TABLE users( 
