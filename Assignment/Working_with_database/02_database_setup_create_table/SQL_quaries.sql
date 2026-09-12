@@ -7,8 +7,8 @@ USE foodie_app;
 CREATE TABLE restaurants (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    cuisine VARCHAR(50) NOT NULL,    -- Fixed typo 'cuisin'
-    rating DECIMAL(3,1),             -- Fixed to support ratings like 4.5
+    cuisine VARCHAR(50) NOT NULL,    
+    rating DECIMAL(3,1),             
     location VARCHAR(100) NOT NULL
 );
 
