@@ -16,7 +16,7 @@ INSERT INTO MusicPlaylist (song_name,artist,genre,duration) VALUES (
 ('Excuses',	'AP Dhillon','Punjabi Pop',157),
 ('Apna Bana Le','Arijit Singh','Bollywood',261);
 
--- show ony 3 row
+-- show only 3 row
 
 SELECT song_name,artist from MusicPlaylist LIMIT 3;
 
