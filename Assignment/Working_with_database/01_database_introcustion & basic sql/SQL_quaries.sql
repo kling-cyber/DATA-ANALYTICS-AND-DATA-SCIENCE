@@ -1,18 +1,20 @@
--- Create a new database named 'foodie_app' 
-CREATE DATABASE foodie_app;
-SHOW DATABASES ;
-USE foodie_app;
+-- 1. Create and select the correct database
+CREATE DATABASE music_streaming_app;
+USE music_streaming_app;
 
-CREATE TABLE restaurants (
-id INT AUTO_INCREMENT PRIMARY KEY ,
-name VARCHAR(100) NOT NULL,
-cusine VARCHAR(50) NOT NULL,
-rating DECIMAL(3,1),
-location VARCHAR(100) NOT NULL);
+-- 2. Create the playlists table exactly as requested
+CREATE TABLE playlists (
+    playlist_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    created_by VARCHAR(100) NOT NULL
+);
 
-CREATE TABLE users( 
-user_id INT AUTO_INCREMENT PRIMARY KEY ,
-username VARCHAR(100) NOT NULL,
-email VARCHAR(150) NOT NULL UNIQUE ,
-phone_number BIGINT NOT NULL UNIQUE ,
-created_at DATETIME );
+-- 3. Insert three sample rows (ensuring one is created by 'Amit' for Q4)
+INSERT INTO playlists (playlist_id, name, created_by) VALUES 
+(1, 'Bollywood Hits', 'Amit'),
+(2, 'Chill Vibes', 'Rahul'),
+(3, 'Workout Mix', 'Suresh');
+
+-- 4. Select query to display all playlists created by 'Amit'
+SELECT * FROM playlists 
+WHERE created_by = 'Amit';
