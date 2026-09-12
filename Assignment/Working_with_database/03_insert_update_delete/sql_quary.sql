@@ -21,5 +21,5 @@ SET SQL_SAFE_UPDATES = 1;
 DELETE FROM playlist WHERE duration < 120 ;
 
 -- update 
-UPDATE playlist SET song_name = CONCAT(song_name ,  'Remix') 
+UPDATE playlist SET song_name = CONCAT(song_name ,  ' Remix') 
 WHERE artist = 'AP Dhillon' AND duration >180;
