@@ -37,9 +37,11 @@ most_liked AS (
     SELECT * FROM Posts ORDER BY likes DESC LIMIT 3 
 )
 
-SELECT name ,followers FROM most_followed
-UNION
-SELECT post_name , likes FROM most_liked ;
+SELECT 'User' AS list_type, name, followers AS count
+FROM most_followed
+UNION ALL
+SELECT 'Post' AS list_type, post_name, likes AS count
+FROM most_liked ;
 ```
 
 # 4. Write a recursive CTE that generates a list of dates for the next 7 days starting from today, similar to how BookMyShow shows available dates for movie bookings.<br><br><em><strong>Hint:</strong> Use a base case for today and recursion to add one day at a time.</em>
@@ -48,11 +50,11 @@ SELECT post_name , likes FROM most_liked ;
 WITH RECURSIVE seven_days AS 
 ( SELECT CURDATE() AS today
 UNION ALL
-SELECT today + INTERVAL + 1 DAY 
+SELECT today + INTERVAL 1 DAY 
 FROM seven_days 
-WHERE today < CURDATE() + INTERVAL + 6 DAY
+WHERE today < CURDATE() + INTERVAL 6 DAY
 )
-SELECT * FROM seven_days
+SELECT * FROM seven_days;
 ```
 
 # 5. Given a messy SQL query that finds all users with more than 1000 followers from a 'Users' table, refactor it to use a CTE for better clarity and maintainability.
@@ -61,5 +63,5 @@ SELECT * FROM seven_days
 WITH follower_morethan_1k AS (
     SELECT * FROM Users WHERE followers > 1000 
 )
-SELECT * FROM follower_morethan_10k ;
+SELECT * FROM follower_morethan_1k ;
 ```
