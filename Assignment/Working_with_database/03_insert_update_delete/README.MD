@@ -63,7 +63,7 @@ WHERE duration < 120;
 
 ```sql
 UPDATE playlist
-SET song_name = CONCAT(song_name, ' ', 'Remix')
+SET song_name = CONCAT(song_name, ' ', ' Remix')
 WHERE artist = 'AP Dhillon';
 ```
 
