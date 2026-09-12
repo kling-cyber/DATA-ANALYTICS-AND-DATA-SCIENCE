@@ -1,53 +1,58 @@
-USE music_detail_app;
--- QUESTION 1: Create 'restaurants' and 'dishes' relational tables
-CREATE TABLE restaurants_list (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    city VARCHAR(100) NOT NULL
+USE foodie_app;
+
+-- TASK 8: GROUP BY & HAVING
+
+-- QUESTION 1: Create Orders table and insert sample records
+CREATE TABLE Orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    payment_method VARCHAR(30) CHECK (payment_method IN ('UPI', 'Card', 'Wallet', 'COD')),
+    amount DECIMAL(10,2)
 );
 
-CREATE TABLE dishes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    restaurant_id INT,
-    dish_name VARCHAR(100) NOT NULL,
-    price DECIMAL(10,2) NOT NULL
-);
+INSERT INTO Orders (user_id, payment_method, amount)
+VALUES
+(1, 'Card', 500.00),
+(1, 'UPI', 1250.50),
+(2, 'Card', 2300.00),
+(5, 'Wallet', 750.75),
+(4, 'COD', 1500.00),
+(5, 'UPI', 450.25),
+(6, 'Card', 3200.80),
+(3, 'Wallet', 999.99),
+(8, 'COD', 1800.50),
+(11, 'UPI', 2750.00),
+(15, 'Card', 650.40);
 
--- Inserting at least 3 restaurants and 2-3 dishes for each
-INSERT INTO restaurants_list (name, city) VALUES 
-('TGT - The Grand Thakar', 'Rajkot'), 
-('Wisteria Cafe', 'Surat'), 
-("La Pino'z Pizza", 'Ahmedabad');
+-- QUESTION 2: Count orders placed using each payment method
+SELECT payment_method, COUNT(order_id) AS Total_orders
+FROM Orders
+GROUP BY payment_method;
 
-INSERT INTO dishes (restaurant_id, dish_name, price) VALUES 
-(1, 'Gujarati Thali', 320.00), 
-(1, 'Khandvi', 90.00),
-(2, 'Sizzler', 450.00), 
-(2, 'Pasta', 280.00),
-(3, 'Cheese Burst Pizza', 350.00),
-(99, 'Ghost Burger', 190.00); -- Simulated orphaned dish (ID 99 doesn't exist in restaurants)
+-- QUESTION 3: Find the total amount spent by each user
+SELECT user_id, SUM(amount) AS total_amount
+FROM Orders
+GROUP BY user_id;
 
--- QUESTION 2: Zomato-style INNER JOIN
+-- QUESTION 4: Show payment methods with average order amount greater than 300
+SELECT payment_method, AVG(amount) AS average_amount
+FROM Orders
+GROUP BY payment_method
+HAVING AVG(amount) > 300;
 
-SELECT d.dish_name, d.price, r.name AS restaurant_name, r.city 
-FROM dishes d
-INNER JOIN restaurants_list r ON d.restaurant_id = r.id;
+-- QUESTION 5: WHERE filters rows before grouping, while HAVING filters groups after grouping
+SELECT *
+FROM Orders
+WHERE amount > 300;
 
+SELECT payment_method, AVG(amount) AS average_amount
+FROM Orders
+GROUP BY payment_method
+HAVING AVG(amount) > 300;
 
--- QUESTION 3: LEFT JOIN showing restaurants even with an empty menu
-
-SELECT r.name AS restaurant_name, r.city, d.dish_name, d.price 
-FROM restaurants_list r
-LEFT JOIN dishes d ON r.id = d.restaurant_id;
-
-
--- QUESTION 4: RIGHT JOIN capturing unlinked data errors
-
-SELECT r.name AS restaurant_name, d.dish_name, d.price 
-FROM restaurants_list r
-RIGHT JOIN dishes d ON r.id = d.restaurant_id;
-
-
--- QUESTION 5: Spotify Scenario Playlist JOIN Choice (Answered in your .md)
-
--- We use a LEFT JOIN starting from Playlists to track empty listings cleanly.
+-- WHERE and HAVING can also be used together
+SELECT payment_method, AVG(amount) AS average_amount
+FROM Orders
+WHERE amount > 100
+GROUP BY payment_method
+HAVING AVG(amount) > 300;
