@@ -1,46 +1,60 @@
 USE music_detail_app;
 
--- QUESTION 1: FULL JOIN Simulation (MySQL Workaround)
--- Note: MySQL does not support FULL JOIN directly, so we use LEFT JOIN + UNION + RIGHT JOIN
-SELECT i.name AS influencer_name, c.collab_date 
-FROM Influencers i
-LEFT JOIN Collaborations c ON i.id = c.influencer1_id
-UNION
-SELECT i.name AS influencer_name, c.collab_date 
-FROM Influencers i
-RIGHT JOIN Collaborations c ON i.id = c.influencer1_id;
+-- QUESTION 1: Create 'restaurants' and 'dishes' relational tables
+CREATE TABLE restaurants (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    city VARCHAR(100)
+);
 
--- QUESTION 2: SELF JOIN for Nested Spotify Playlists
-SELECT child.playlist_name AS SubPlaylist, parent.playlist_name AS ParentPlaylist
-FROM Playlists child
-LEFT JOIN Playlists parent ON child.parent_playlist_id = parent.id;
+CREATE TABLE dishes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    restaurant_id INT NOT NULL,
+    dish_name VARCHAR(150),
+    price DECIMAL(5,2)
+);
 
--- QUESTION 3: Multiple Chain JOINs (Flipkart-style 3 Table Connection)
-SELECT u.username, o.order_date, p.amount 
-FROM Users u
-LEFT JOIN Orders o ON u.id = o.user_id
-LEFT JOIN Payments p ON o.id = p.order_id;
+-- Insert sample restaurants
+INSERT INTO restaurants (name, city) VALUES
+('Indian Accent', 'New Delhi'),
+('Bukhara', 'New Delhi'),
+('Peter Cat', 'Kolkata'),
+('Britannia & Co.', 'Mumbai');
 
--- QUESTION 4: Eliminating Zomato Review Duplicates
-SELECT DISTINCT r.id, r.name, rev.review_text 
-FROM Restaurants r
-INNER JOIN Reviews rev ON r.id = rev.restaurant_id;
+-- Insert sample dishes
+INSERT INTO dishes (restaurant_id, dish_name, price) VALUES
+(1, 'Butter Chicken', 450.00),
+(1, 'Garlic Naan', 120.00),
+(2, 'Dal Bukhara', 550.00),
+(2, 'Tandoori Chicken', 650.00),
+(3, 'Chicken Chelo Kebab', 380.00),
+(3, 'Mutton Biryani', 450.00),
+(4, 'Prawn Koliwada', 520.00),
+(99, 'Orphan Dish', 250.00);
 
-/* 
-Explanation: Duplicates happen because a single restaurant has a One-to-Many 
-relationship with reviews. One restaurant can have multiple customer review rows, 
-forcing the restaurant name to print repeatedly unless DISTINCT or GROUP BY is used.
-*/
+-- QUESTION 2: INNER JOIN to display each dish with restaurant name and city
+SELECT d.dish_name, d.price, r.name AS restaurant_name, r.city
+FROM dishes d
+INNER JOIN restaurants r
+ON d.restaurant_id = r.id;
 
--- QUESTION 5: Comparing Join Efficiencies (Products & Categories)
--- Condition A: Standard Relational Key Equivalence Join
-SELECT p.product_name, c.category_name 
-FROM Products p 
-INNER JOIN Categories c ON p.category_id = c.id;
+-- QUESTION 3: LEFT JOIN to show all restaurants, including restaurants with no dishes
+SELECT r.name AS restaurant_name, r.city, d.dish_name, d.price
+FROM restaurants r
+LEFT JOIN dishes d
+ON r.id = d.restaurant_id;
 
-/* 
-Efficiency Explanation: The standard INNER JOIN condition (Condition A) is 
-significantly more efficient than using nested subquery loops. Modern relational 
-query planners can evaluate table index trees all at once, rather than running 
-iterative row-by-row lookups.
-*/
+-- QUESTION 4: RIGHT JOIN to show all dishes, including dishes with invalid restaurant_id
+SELECT r.name AS restaurant_name, d.dish_name, d.price
+FROM restaurants r
+RIGHT JOIN dishes d
+ON r.id = d.restaurant_id;
+
+-- QUESTION 5: LEFT JOIN to show all playlists, even if some playlists are empty
+SELECT p.playlist_name, s.song_name
+FROM playlists p
+LEFT JOIN songs s
+ON p.playlist_id = s.playlist_id;
+
+-- LEFT JOIN is used because it keeps every playlist from the left table,
+-- even when there is no matching song in the songs table.
