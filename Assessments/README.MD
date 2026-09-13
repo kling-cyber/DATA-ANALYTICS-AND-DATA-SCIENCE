@@ -26,7 +26,8 @@ WITH agent_deliveries AS (
            city,
            COUNT(*) AS total_deliveries
     FROM delivery
-    WHERE MONTH(delivery_date) = MONTH(CURDATE())
+    WHERE status = 'Completed'
+      AND MONTH(delivery_date) = MONTH(CURDATE())
       AND YEAR(delivery_date) = YEAR(CURDATE())
     GROUP BY city, name
 )
@@ -47,6 +48,7 @@ FROM agent_deliveries;
 - `DENSE_RANK()` ranks the delivery agents within each city.
 - `LAG()` retrieves the delivery count of the previous agent in the ranking order.
 - `PARTITION BY city` makes both calculations independent for each city. Window functions are more maintainable because the ranking and previous-row comparison can be performed directly without complex self-joins or correlated subqueries.
+- The `status = 'Completed'` condition ensures that only completed deliveries are counted, matching the requirement.
 
 # S6
 ## You are optimising a SQL report for a food delivery operations team. The report first identifies the top 5 restaurant categories by total order count, and then retrieves the full order details only for restaurants belonging to those top categories. A colleague has written this as a deeply nested subquery inside the WHERE clause.
