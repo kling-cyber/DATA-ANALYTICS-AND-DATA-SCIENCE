@@ -43,9 +43,14 @@ FROM playlists ;
 # 5. Imagine you want to show the top 2 playlists per user based on total_likes, like Spotify's 'Your Top Playlists' feature. Write a query using a window function to select only the top 2 playlists for each user.
 
 ```SQL
-SELECT playlist_name, user_id, total_likes FROM (
-SELECT playlist_name, user_id, total_likes,
-DENSE_RANK() OVER( PARTITION BY user_id ORDER BY total_likes DESC) AS rating_by_likes 
-FROM playlists) AS play_rank 
-WHERE rating_by_likes <= 2;
+SELECT playlist_name, user_id, total_likes
+FROM (
+    SELECT playlist_name, user_id, total_likes,
+           ROW_NUMBER() OVER (
+               PARTITION BY user_id
+               ORDER BY total_likes DESC
+           ) AS row_num
+    FROM playlists
+) AS play_rank
+WHERE row_num <= 2;
 ```
