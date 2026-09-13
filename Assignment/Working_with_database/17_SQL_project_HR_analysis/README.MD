@@ -55,8 +55,8 @@ VALUES
 (3, 'Anjali Patel', 3.5, '2026-03-20'),
 (4, 'Vivek Desai', 4.0, '2026-04-12'),
 (5, 'Pooja Patel', 4.5, '2026-05-03'),
-(6, 'Karan Patel', 5.0, '2026-06-15'),
-(6, 'Meera Shah', 4.5, '2026-06-22');
+(5, 'Karan Patel', 5.0, '2026-06-15'),
+(5, 'Meera Shah', 4.5, '2026-06-22');
 ```
 # 4. Write a SQL query using a JOIN to display each restaurant's name, cuisine, and its average review rating (from the Review table), ordered by highest average rating first.<br><strong>Hint:</strong> Use JOIN and GROUP BY with aggregate functions.
 
