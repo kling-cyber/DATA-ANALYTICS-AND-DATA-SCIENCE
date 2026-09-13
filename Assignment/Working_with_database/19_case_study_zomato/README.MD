@@ -18,9 +18,9 @@ LIMIT 3 ;
 # 3. Find all restaurants that offer online delivery but have a rating below 3.0, and suggest a marketing strategy to improve their ratings based on your findings.<br><br><em><strong>Hint:</strong> Look for patterns in location, cuisine, or price that might explain the low ratings.</em>
 
 ```sql
-SELECT name, online_order,rate, votes, cuisine FROM restaurants 
-WHERE online_order LIKE '%yes%'
-AND rate < 3 ;
+SELECT name, online_order,rate, votes, cuisines FROM restaurants 
+WHERE online_order = 'Yes'
+AND CAST(SUBSTRING_INDEX(rate, '/', 1) AS DECIMAL(3,1)) < 3.0 ;
 ```
 - Improve quality of food compate to rate ( add value for money)
 - Use better packaging to food reaches customers in good condition.
