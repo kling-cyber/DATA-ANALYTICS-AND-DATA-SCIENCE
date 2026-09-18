@@ -1,26 +1,22 @@
-**Live web hosting** is a service that stores your website’s files on an internet-connected server, making the website accessible to users through a domain name.
+# What is Web Hosting?
 
-For example, a website hosted on a live server can be visited at `https://example.com`, while a locally hosted website is accessible only on your computer.
+**Web hosting** is a service that stores a website's files on an Internet-connected server and makes those files available to users through the website's domain name.
 
-**Types of web hosting:**
+### How web hosting works
+1. Website files are stored on a hosting server.
+2. A domain name points users to the website.
+3. A browser sends a request for the website.
+4. The hosting server returns the required resources.
+5. The browser displays the website.
 
-1. **Shared hosting**  
-   Multiple websites share one server. Affordable and suitable for small websites.
+### Types of web hosting
+1. **Shared hosting**: Multiple websites share server resources. It is generally inexpensive.
+2. **VPS hosting**: A physical server is divided into isolated virtual servers.
+3. **Dedicated hosting**: One customer uses an entire physical server.
+4. **Cloud hosting**: Website resources can run across multiple connected servers.
+5. **Managed WordPress hosting**: Hosting optimized for WordPress with management features.
+6. **Reseller hosting**: Hosting resources can be purchased and resold to other customers.
+7. **Free hosting**: Hosting provided without a direct fee, usually with significant limitations.
 
-2. **VPS hosting**  
-   A physical server is divided into isolated virtual servers. Provides more control and performance than shared hosting.
-
-3. **Dedicated hosting**  
-   One website uses an entire physical server. Powerful but more expensive.
-
-4. **Cloud hosting**  
-   Website files are hosted across multiple connected servers. Scalable and reliable.
-
-5. **Managed WordPress hosting**  
-   Hosting optimized for WordPress, often including updates, backups, security, and performance optimization.
-
-6. **Reseller hosting**  
-   Allows you to purchase hosting resources and sell hosting services to other customers.
-
-7. **Free hosting**  
-   Provides hosting at no cost but usually has limited storage, bandwidth, features, or advertisements.
+### Example
+A website hosted on a live server can be accessed publicly through a domain such as `https://example.com`, while a website running only on a local computer is normally accessible only from that environment.
