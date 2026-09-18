@@ -1081,9 +1081,44 @@ else 'lower earner'
 end as salary_earner from tbl_salesman
 
 ```
+# Connect SQL with Excel #
+
 
 # what is SQL windows function  ?
-
+- windows functions are used to applied calculations and add unique rows in a tables there we use windows function
+- windows function are used to add or set rows related to the current row without grouping the result into single row
+  
+# types of windows functions #
+-row_number()
+-rank()
+-dense rank()
+-NtiLE()
+-LAG()
+-LEAD()
+-first_value()
+-last_value()
+-sum() -> over()
+-avg() -> over()
+-count() -> over()
+-max() > over()
+-min() -> over() 
+ ** EXAMPLES **
+ 1. row_number : Assign a real number to each row 
+```````
+select name,salary,row_number() over (order by salary desc) from tbl_salesman
+```````
+2. rank : Provides ranking with gaps for duplicate  values
+   ````````
+   select name,salary,rank() over(order by salary desc) from tbl_salesman
+   ````````
+3. dense_rank : Provides ranking without gaps for duplicate values
+   `````````
+   select name,salary,dense_rank() over(order by salary desc) from tbl_salesman
+   `````````
+4. NTILE() : Provides rows into equal groups
+   `````````
+   select name,salary,NTILE() over(order by salary desc) from tbl_salesman
+   `````````
 # what is CTE in SQL ? 
 
 
