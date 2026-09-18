@@ -1089,19 +1089,19 @@ end as salary_earner from tbl_salesman
 - windows function are used to add or set rows related to the current row without grouping the result into single row
   
 # types of windows functions #
--row_number()
--rank()
--dense rank()
--NtiLE()
--LAG()
--LEAD()
--first_value()
--last_value()
--sum() -> over()
--avg() -> over()
--count() -> over()
--max() > over()
--min() -> over() 
+-row_number().
+-rank().
+-dense rank().
+-NtiLE().
+-LAG().
+-LEAD().
+-first_value().
+-last_value().
+-sum() -> over().
+-avg() -> over().
+-count() -> over().
+-max() > over().
+-min() -> over(). 
  ** EXAMPLES **
  1. row_number : Assign a real number to each row 
 ```````
@@ -1117,12 +1117,65 @@ select name,salary,row_number() over (order by salary desc) from tbl_salesman
    `````````
 4. NTILE() : Provides rows into equal groups
    `````````
-   select name,salary,NTILE() over(order by salary desc) from tbl_salesman
+   select name,salary,NTILE(3) over(order by salary desc) from tbl_salesman
    `````````
-# what is CTE in SQL ? 
+5. LAG() : Return previous Row/Value
+   `````````
+   select name,salary,LAG(SALARY,1) over(order by salary desc) AS previous_row from tbl_salesman 
+   `````````
+6. LEAD() : Return next Row/Value
+   `````````
+   select name,salary,LEAD(SALARY,1) over(order by salary desc) AS next_salary from tbl_salesman
+   `````````
+7. first_value : Return first value in windows 
+   `````````
+   select name,salary,first_value(salary) over(order by salary desc) from tbl_salesman
+   `````````
+8. last_value : Return last value in windows 
+   `````````
+   select name,salary,last_value(salary) over(order by salary desc) from tbl_salesman
+   `````````
+9. sum() over() : running with total windows/cummulative
+   `````````
+   select name,salary,sum(salary) over(order by salary) from tbl_salesman
+   `````````
+10. avg() over() : running with total average
+   `````````
+   select name,salary,avg(salary) over() from tbl_salesman
+   `````````
+11. count() over() : running with total count
+   `````````
+   select name,salary,count(salary) over() from tbl_salesman
+   `````````
+12. max() over() : Return maximum value in windows
+   `````````
+     select name,salary,min(salary) over() from tbl_salesman
+          or
+   select name,salary,max(salary) over(order by salary) from tbl_salesman
+   `````````
+13. min() over() : Return minimum value in windows
+   `````````
+   select name,salary,min(salary) over() from tbl_salesman
+            or 
+   select name,salary,min(salary) over(order by salary) from tbl_salesman
+   `````````
+# what is CTE or WITH Clause in SQL ? #
+ CTE : It stand for Common Table Expression
+ -  Defines a Temporary Result set that can be used within a query
+ -  It simplifies complex SQL statements making them easier to read/manage and reuse it using WITH clause
 
-
-
+   ** QUERY **
+   ````````
+    WITH HighSalary AS
+(
+    SELECT ENAME, SAL
+    FROM EMP
+    WHERE SAL > 40000
+)
+SELECT *
+FROM HighSalary;
+   ````````
+    
 
 
 
